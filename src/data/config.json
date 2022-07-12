@@ -1,0 +1,381 @@
+{
+  "instance_address": "1",
+  "mqtt_server_uri": "tcp://localhost:11883",
+  "mqtt_client_id_prefix": "iq-controls",
+  "mqtt_server_username": "",
+  "mqtt_server_password": "",
+  "work_dir": "src",
+  "log_file": "log/iq-controls.log",
+  "log_level": "debug",
+  "log_format": "text",
+  "udp": {
+    "port": "3001"
+  },
+  "http": {
+    "host": "http://192.168.8.150"
+  },
+  "devices": [
+    {
+      "name": "North luminance",
+      "address": 6,
+      "serviceName": "sensor_lumin"
+    },
+    {
+      "name": "Bathroom small presence sensor",
+      "address": 166,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Laundry presence sensor",
+      "address": 167,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Utility presence sensor",
+      "address": 168,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "X1 presence sensor",
+      "address": 169,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Aga presence sensor",
+      "address": 170,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Entry presence sensor",
+      "address": 171,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Kitchen presence sensor",
+      "address": 172,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Living room presence sensor",
+      "address": 173,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Garage presence sensor",
+      "address": 174,
+      "serviceName": "sensor_presence",
+      "config": {
+        "minValue": 50
+      }
+    },
+    {
+      "name": "Bathroom big temperature sensor",
+      "address": 123,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living room temperature sensor",
+      "address": 124,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living entry temperature sensor",
+      "address": 125,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Office temperature sensor",
+      "address": 126,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Kitchen temperature sensor",
+      "address": 127,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Entry temperature sensor",
+      "address": 128,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "WC temperature sensor",
+      "address": 129,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Bedroom temperature sensor",
+      "address": 130,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Garage temperature sensor",
+      "address": 131,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Aga temperature sensor",
+      "address": 132,
+      "serviceName": "sensor_temp",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Office dimming lights 1",
+      "address": 22,
+      "serviceName": "out_lvl_switch",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Office light big",
+      "address": 133,
+      "serviceName": "out_bin_switch",
+      "variableName": "IOO0133"
+    },
+    {
+      "name": "Office light small",
+      "address": 134,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Living room main light",
+      "address": 135,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Living room night light",
+      "address": 13,
+      "serviceName": "out_lvl_switch",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living room sofa light",
+      "address": 14,
+      "serviceName": "out_lvl_switch",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living room sofa light 2",
+      "address": 23,
+      "serviceName": "out_lvl_switch",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living room tv light",
+      "address": 15,
+      "serviceName": "out_lvl_switch",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living room tv light 2",
+      "address": 24,
+      "serviceName": "out_lvl_switch",
+      "config": {
+        "multiplier": 0.1
+      }
+    },
+    {
+      "name": "Living room center light",
+      "address": 137,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Living room hall light 1",
+      "address": 138,
+      "serviceName": "out_bin_switch"
+    },
+    {},
+    {
+      "name": "Living room hall light 2",
+      "address": 139,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Living room window light",
+      "address": 140,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bathroom big lights small",
+      "address": 141,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bathroom big lights big",
+      "address": 142,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bathroom big fan",
+      "address": 143,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Wc main",
+      "address": 144,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Wc light over mirror",
+      "address": 145,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Wc fan",
+      "address": 146,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Kitchen light 1",
+      "address": 147,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Kitchen light 2",
+      "address": 148,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Kitchen light hanging",
+      "address": 149,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bedroom light 1",
+      "address": 150,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bedroom light 2",
+      "address": 151,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bedroom night light",
+      "address": 152,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Garage lamp Aga",
+      "address": 153,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Garage lamp Rafal",
+      "address": 154,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Attic light",
+      "address": 155,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Outside top light",
+      "address": 156,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Aga lights 1",
+      "address": 157,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Aga lights 2",
+      "address": 158,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Entry lights",
+      "address": 159,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Utility lights",
+      "address": 160,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Laundry lights",
+      "address": 161,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Garden pump",
+      "address": 162,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Front AC",
+      "address": 163,
+      "serviceName": "out_bin_switch"
+    },
+    {
+      "name": "Bonfire",
+      "address": 164,
+      "serviceName": "out_bin_switch"
+    }
+  ]
+}

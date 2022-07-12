@@ -1,0 +1,11 @@
+.idea
+.DS_Store
+*.deb
+package/build/*
+!package/build/.gitkeep
+/package/debian/opt/thingsplex/iqcontrols/iqcontrols
+/src/iqcontrols
+testdata/log/*
+!testdata/log/.gitkeep
+testdata/data/*
+!testdata/data/.gitkeep

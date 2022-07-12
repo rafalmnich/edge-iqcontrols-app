@@ -1,0 +1,71 @@
+#!/bin/bash
+set -e
+
+add_user_and_group() {
+	if ! getent group thingsplex >/dev/null
+	then
+		echo -n "Adding group thingsplex..."
+		addgroup --quiet \
+			--system \
+			thingsplex 2>/dev/null || true
+		echo "...OK"
+	fi
+
+	if ! getent passwd iqcontrols >/dev/null
+	then
+		echo -n "Adding user iqcontrols..."
+		adduser --quiet \
+			--system \
+			--ingroup thingsplex \
+			--no-create-home \
+			--disabled-password \
+			iqcontrols 2>/dev/null || true
+		echo "...OK"
+	fi
+}
+
+create_dirs_and_files() {
+	echo -n "Creating required directories and files..."
+	mkdir -p /opt/thingsplex/iqcontrols/data
+	mkdir -p /var/log/thingsplex/iqcontrols
+	touch /var/log/thingsplex/iqcontrols/iqcontrols.log
+	echo "...OK"
+}
+
+set_ownership() {
+	echo -n "Set proper ownership and rights for files..."
+	chown -R iqcontrols:thingsplex /opt/thingsplex/iqcontrols || true
+	chown -R iqcontrols:thingsplex /var/log/thingsplex/iqcontrols || true
+	chmod 644 /opt/thingsplex/iqcontrols/defaults/* || true
+	chmod 644 /opt/thingsplex/iqcontrols/VERSION
+	chmod 644 /var/log/thingsplex/iqcontrols/* || true
+	echo "...OK"
+}
+
+configure_service() {
+		echo -n "Configuring service..."
+		systemctl enable iqcontrols.service > /dev/null || true
+		systemctl --system daemon-reload >/dev/null || true
+		systemctl start iqcontrols.service > /dev/null || true
+		
+		echo "...OK"
+}
+
+case "$1" in
+	configure)
+		add_user_and_group
+		create_dirs_and_files
+		set_ownership
+		configure_service
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*)
+		echo "postinst called with an unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+exit 0
