@@ -1,0 +1,24 @@
+language: go
+
+go:
+  - "1.18"
+
+env:
+  global:
+    - GO111MODULE=on
+
+install: true
+
+before_install:
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.46.1
+  - GO111MODULE=off go get golang.org/x/lint/golint
+  - GO111MODULE=off go get golang.org/x/tools/cmd/cover
+  - GO111MODULE=off go get github.com/mattn/goveralls
+  - docker run -d -p 11883:1883 eclipse-mosquitto:1.6.8
+
+script:
+  - cd src && golangci-lint run ./... --timeout 2m && cd ..
+  - cd src && go test -p 1 -v -covermode=atomic -coverprofile=profile_full.cov -coverpkg=./... ./...
+  - cd src && cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov;
+  - cd src && goveralls -coverprofile=profile.cov -service=travis-pro -repotoken VnTwYJl5dEFXXcPH6L4hByQoKmt8rFJV3 || true
+
