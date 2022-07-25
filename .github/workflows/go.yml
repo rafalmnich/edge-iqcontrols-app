@@ -30,12 +30,20 @@ jobs:
         working-directory: ./src
 
       - name: Test cleanup
-        run: cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test | grep -v 'mode: atomic' > profile.cov;
+        run: cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov;
         working-directory: ./src
+        
+      - name: Convert coverage
+        uses: jandelgado/gcov2lcov-action@v1
+        with:
+          infile: profile.cov        # optional, default filename is `coverage.out`
+          outfile: coverage.lcov      # optional, default filename is `coverage.lcov`
+          version: v1.0.4             # optional, use specific `gcov2lcov` release version
+          working-directory: src # optional, change working directory
 
       - name: Test coverage
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
-          path-to-lcov: ${{ github.workspace }}/src/profile.cov
+          path-to-lcov: ${{ github.workspace }}/src/coverage.lcov 
           
