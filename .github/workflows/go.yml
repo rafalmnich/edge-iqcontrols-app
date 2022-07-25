@@ -23,8 +23,7 @@ jobs:
         with:
           version: '1.6'
           ports: '11883:1883'
-          certificates: ${{ github.workspace }}/.ci/tls-certificates
-          config: ${{ github.workspace }}/.ci/mosquitto.conf
+          config: ${{ github.workspace }}/.github/workflows/mosquitto.conf
       ##        config: ${{ github.workspace }}/.ci/mosquitto.conf
       ##        password-file: ${{ github.workspace}}/.ci/mosquitto.passwd
       #        container-name: 'mqtt'
