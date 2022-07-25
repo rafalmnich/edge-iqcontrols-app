@@ -100,8 +100,8 @@ func GetMQTT(t *testing.T) *fimpgo.MqttTransport {
 	mqtt := fimpgo.NewMqttTransport(
 		"tcp://localhost:11883",
 		"app_tests",
-		"guest",
-		"guest",
+		"",
+		"",
 		true,
 		1,
 		1,
