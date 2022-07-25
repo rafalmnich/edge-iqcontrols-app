@@ -18,7 +18,7 @@ before_install:
 
 script:
   - cd src && golangci-lint run ./... --timeout 2m && cd ..
-  - cd src && go test -p 1 -v -covermode=atomic -coverprofile=profile_full.cov -coverpkg=./... ./...
-  - cd src && cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov;
-  - cd src && goveralls -coverprofile=profile.cov -service=travis-pro -repotoken VnTwYJl5dEFXXcPH6L4hByQoKmt8rFJV3 || true
+  - cd src && go test -p 1 -v -covermode=atomic -coverprofile=profile_full.cov -coverpkg=./... ./... && cd ..
+  - cd src && cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov && cd ..;
+  - cd src && goveralls -coverprofile=profile.cov -service=travis-pro -repotoken VnTwYJl5dEFXXcPH6L4hByQoKmt8rFJV3 || cd ..
 

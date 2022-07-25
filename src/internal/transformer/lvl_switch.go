@@ -13,7 +13,7 @@ const (
 	// OutLvlSwitch represents a strategy for out lvl switch.
 	OutLvlSwitch = "out_lvl_switch"
 
-	levelReport = "evt.level.report"
+	levelReport = "evt.lvl.report"
 )
 
 // LvlSwitchFimpMessage returns a fimp event for lvl switch.
@@ -30,12 +30,29 @@ func LvlSwitchFimpMessage(device config.Device, val int64) *fimpgo.FimpMessage {
 
 // LvlSwitchValue returns value for lvl switch.
 func LvlSwitchValue(device config.Device, msg *fimpgo.Message) (value string, err error) {
-	val, err := msg.Payload.GetIntValue()
+	v, err := val(msg)
 	if err != nil {
 		return "", err
 	}
 
-	return applyReverseMultiplier(device.Config, float64(val)), nil
+	return applyReverseMultiplier(device.Config, float64(v)), nil
+}
+
+func val(msg *fimpgo.Message) (int64, error) {
+	if msg.Payload.Type != "cmd.binary.set" {
+		return msg.Payload.GetIntValue()
+	}
+
+	v, err := msg.Payload.GetBoolValue()
+	if err != nil {
+		return 0, err
+	}
+
+	if v {
+		return 100, nil
+	}
+
+	return 0, nil
 }
 
 func applyReverseMultiplier(c map[string]interface{}, val float64) string {

@@ -6,9 +6,10 @@ import (
 	"strings"
 
 	"github.com/futurehomeno/fimpgo"
+	log "github.com/sirupsen/logrus"
 )
 
-const cgxPath = "/cgx/all_ios.cgx"
+const cgxPath = "/cgx/custom/all.cgx"
 
 type (
 	// RestPublisher represents a rest publisher.
@@ -70,6 +71,8 @@ func (r *restPublisher) Publish(address, value string) error {
 	}
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	log.Debugf("Sending request: %s, data: %s", req.URL.String(), form.Encode())
 
 	resp, err := r.client.Do(req)
 	if err != nil {

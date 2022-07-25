@@ -3,6 +3,7 @@ package reporter_test
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/futurehomeno/fimpgo"
 	"github.com/stretchr/testify/require"
@@ -23,7 +24,7 @@ func TestFimp_Report(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "report for luminosity",
+			name: "Report for luminosity",
 			add:  1,
 			val:  100,
 			want: &fimpgo.Message{
@@ -39,35 +40,20 @@ func TestFimp_Report(t *testing.T) {
 		},
 	}
 
-	mqtt := fimpgo.NewMqttTransport(
-		"tcp://localhost:11883",
-		"app_tests",
-		"guest",
-		"guest",
-		true,
-		1,
-		1,
-	)
-	err := mqtt.Start()
-	require.NoError(t, err)
+	mqtt := GetMQTT(t)
 
 	t.Cleanup(mqtt.Stop)
+	msgChan := Subscribe(t, mqtt, "pt:j1/mt:evt/rt:dev/rn:iqcontrols/ad:1/#")
 
-	err = mqtt.Subscribe("pt:j1/mt:evt/rt:dev/rn:iqcontrols/ad:1/#")
-	require.NoError(t, err)
-
-	msgChan := make(chan *fimpgo.Message, 10)
-	mqtt.RegisterChannel("response_channel", msgChan)
-
-	for _, ttt := range tests {
-		tt := ttt
+	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
 			checked := make(chan struct{})
 
 			if !tt.wantErr {
-				go check(t, msgChan, checked)
+				go check(t, msgChan, checked, checkSensorLuminReport)
 			}
 
 			f := reporter.NewFimp(mqtt, transformer.NewFimp([]config.Device{
@@ -96,24 +82,49 @@ func TestFimp_Report(t *testing.T) {
 	}
 }
 
-func check(t *testing.T, msgChan chan *fimpgo.Message, checked chan struct{}) {
+// Subscribe subscribes to the given topic and returns a channel with messages.
+func Subscribe(t *testing.T, mqtt *fimpgo.MqttTransport, topic string) chan *fimpgo.Message {
+	t.Helper()
+
+	err := mqtt.Subscribe(topic)
+	require.NoError(t, err)
+
+	msgChan := make(chan *fimpgo.Message, 10)
+	mqtt.RegisterChannel("response_channel", msgChan)
+
+	return msgChan
+}
+
+// GetMQTT returns a new MQTT transport.
+func GetMQTT(t *testing.T) *fimpgo.MqttTransport {
+	mqtt := fimpgo.NewMqttTransport(
+		"tcp://localhost:11883",
+		"app_tests",
+		"guest",
+		"guest",
+		true,
+		1,
+		1,
+	)
+
+	err := mqtt.Start()
+	require.NoError(t, err)
+
+	return mqtt
+}
+
+func check(t *testing.T, msgChan chan *fimpgo.Message, checked chan struct{}, checkFunc func(t *testing.T, msg *fimpgo.Message)) {
 	t.Helper()
 
 	defer close(checked)
 
-	for {
-		select {
-		case msg := <-msgChan:
-			require.Equal(t, sampleAddress(t, 1), msg.Addr)
-			require.Equal(t, "evt.sensor.report", msg.Payload.Type)
-			require.Equal(t, "sensor_lumin", msg.Payload.Service)
+	select {
+	case msg := <-msgChan:
+		checkFunc(t, msg)
 
-			value, err := msg.Payload.GetFloatValue()
-			require.NoError(t, err)
-			require.Equal(t, float64(100), value)
-
-			return
-		}
+		return
+	case <-time.After(time.Hour):
+		t.Fatal("timeout")
 	}
 
 }
@@ -125,4 +136,16 @@ func sampleAddress(t *testing.T, add int64) *fimpgo.Address {
 	require.NoError(t, err)
 
 	return a
+}
+
+func checkSensorLuminReport(t *testing.T, msg *fimpgo.Message) {
+	require.Equal(t, sampleAddress(t, 1), msg.Addr)
+	require.Equal(t, "evt.sensor.report", msg.Payload.Type)
+	require.Equal(t, "int", msg.Payload.ValueType)
+	require.Equal(t, "sensor_lumin", msg.Payload.Service)
+	require.Equal(t, "Lux", msg.Payload.Properties["unit"])
+
+	value, err := msg.Payload.GetIntValue()
+	require.NoError(t, err)
+	require.Equal(t, int64(100), value)
 }

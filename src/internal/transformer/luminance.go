@@ -15,11 +15,11 @@ const (
 
 // LuminanceFimpMessage returns a fimp event for luminance sensor.
 func LuminanceFimpMessage(_ config.Device, val int64) *fimpgo.FimpMessage {
-	return fimpgo.NewFloatMessage(
+	return fimpgo.NewIntMessage(
 		sensorReport,
 		SensorLumin,
-		float64(val),
-		nil,
+		val,
+		fimpgo.Props{"unit": "Lux"},
 		nil,
 		nil,
 	)
