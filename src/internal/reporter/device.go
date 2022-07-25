@@ -29,9 +29,6 @@ func NewDevice(publisher FimpPublisher) Device {
 
 // InclusionReport reports an inclusion of a device.
 func (i *device) InclusionReport(device config.Device) error {
-	return nil
-	// todo: no inclusion report for now.
-
 	msg := fimpgo.NewObjectMessage("evt.thing.inclusion_report", "iqcontrols", i.inclusion(device), nil, nil, nil)
 	addr, _ := fimpgo.NewAddressFromString("pt:j1/mt:evt/rt:ad/rn:flow/ad:1")
 

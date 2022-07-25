@@ -123,7 +123,7 @@ func check(t *testing.T, msgChan chan *fimpgo.Message, checked chan struct{}, ch
 		checkFunc(t, msg)
 
 		return
-	case <-time.After(time.Second * 5):
+	case <-time.After(time.Second * 15):
 		t.Fatal("timeout")
 	}
 

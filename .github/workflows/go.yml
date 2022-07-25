@@ -24,10 +24,18 @@ jobs:
           version: '1.6'
           ports: '11883:1883'
           config: ${{ github.workspace }}/.github/workflows/mosquitto.conf
-      ##        config: ${{ github.workspace }}/.ci/mosquitto.conf
-      ##        password-file: ${{ github.workspace}}/.ci/mosquitto.passwd
-      #        container-name: 'mqtt'
 
       - name: Test
-        run: go test -v ./...
+        run: go test -p 1 -v -covermode=atomic -coverprofile=profile_full.cov -coverpkg=./... ./...
         working-directory: ./src
+
+      - name: Test cleanup
+        run: cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov;
+        working-directory: ./src
+
+      - name: Test coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: ${{ github.workspace }}/src/profile.cov
+          
