@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -18,19 +18,15 @@ jobs:
       with:
         go-version: 1.18
 
-    - name: Build
-      run: go build -v ./...
-      working-directory: ./src
-
-    - name: Start mosquitto
-      uses: namoshek/mosquitto-github-action@v1
-      with:
-        version: '1.6'
-        ports: '11883:1883'
-#        certificates: ${{ github.workspace }}/.ci/tls-certificates
-#        config: ${{ github.workspace }}/.ci/mosquitto.conf
-#        password-file: ${{ github.workspace}}/.ci/mosquitto.passwd
-        container-name: 'mqtt'
+    - name: Mosquitto MQTT Broker in GitHub Actions
+      uses: Namoshek/mosquitto-github-action@v1
+#      with:
+#        version: '1.6'
+#        ports: '11883:1883'
+##        certificates: ${{ github.workspace }}/.ci/tls-certificates
+##        config: ${{ github.workspace }}/.ci/mosquitto.conf
+##        password-file: ${{ github.workspace}}/.ci/mosquitto.passwd
+#        container-name: 'mqtt'
 
     - name: Test
       run: go test -v ./...
