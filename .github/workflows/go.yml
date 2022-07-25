@@ -30,7 +30,7 @@ jobs:
         working-directory: ./src
 
       - name: Test cleanup
-        run: cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov;
+        run: cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test | grep -v 'mode: atomic' > profile.cov;
         working-directory: ./src
         
       - name: Convert coverage
