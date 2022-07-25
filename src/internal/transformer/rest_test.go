@@ -59,6 +59,18 @@ func TestDevice_Device(t *testing.T) {
 			wantErr: true,
 		},
 		{
+			name:  "level switch turn off",
+			msg:   lvlSwitchTurnOff(6),
+			addr:  "IOO006",
+			value: "0",
+		},
+		{
+			name:  "level switch turn on",
+			msg:   lvlSwitchTurnOn(6),
+			addr:  "IOO006",
+			value: "1000",
+		},
+		{
 			name:  "level switch no multiplier in config",
 			msg:   levelSwitchCommand(7, 75),
 			addr:  "IOO007",
@@ -130,6 +142,23 @@ func wrongLvlSwitchCmd(addr int) *fimpgo.Message {
 		Addr:    tests.DeviceAddress(addr),
 		Payload: msg,
 	}
+}
+
+func lvlSwitchTurnOff(addr int) *fimpgo.Message {
+	msg := fimpgo.NewBoolMessage("cmd.binary.set", "out_lvl_switch", false, nil, nil, nil)
+
+	return &fimpgo.Message{
+		Addr:    tests.DeviceAddress(addr),
+		Payload: msg,
+	}
+}
+
+func lvlSwitchTurnOn(addr int) *fimpgo.Message {
+	msg := lvlSwitchTurnOff(addr)
+
+	msg.Payload.Value = true
+
+	return msg
 }
 
 func wrongBinSwitchCmd(addr int) *fimpgo.Message {

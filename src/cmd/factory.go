@@ -36,6 +36,7 @@ type serviceContainer struct {
 	lifecycle     *lifecycle.Lifecycle
 
 	application         cliffApp.App
+	deviceReporter      reporter.Device
 	configurationLocker router.MessageHandlerLocker
 	manifestLoader      manifest.Loader
 	// TODO: You may add any additional dependency that has to be injected, e.g.: API client.
@@ -113,14 +114,18 @@ func getConfigurationLocker(_ *config.Config) router.MessageHandlerLocker {
 // getApplication creates or returns existing application.
 func getApplication(cfg *config.Config) cliffApp.App {
 	if services.application == nil {
-		services.application = app.New(
-			getConfigService(),
-			getLifecycle(cfg),
-			getManifestLoader(cfg),
-		)
+		services.application = app.New(getConfigService(), getLifecycle(cfg), getManifestLoader(cfg), getDeviceReporter(cfg))
 	}
 
 	return services.application
+}
+
+func getDeviceReporter(cfg *config.Config) reporter.Device {
+	if services.deviceReporter == nil {
+		services.deviceReporter = reporter.NewDevice(getMQTT(cfg))
+	}
+
+	return services.deviceReporter
 }
 
 // newRouting creates new set of routing.

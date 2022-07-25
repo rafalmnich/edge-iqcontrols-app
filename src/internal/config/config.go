@@ -24,6 +24,8 @@ type (
 		ServiceName  string                 `json:"serviceName"`
 		Config       map[string]interface{} `json:"config"`
 		VariableName string                 `json:"variableName"`
+		MsgType      string                 `json:"msgType"`
+		ValueType    string                 `json:"valueType"`
 	}
 )
 

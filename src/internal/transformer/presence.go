@@ -6,15 +6,18 @@ import (
 	"github.com/rafalmnich/edge-iqcontrols-app/internal/config"
 )
 
-// SensorPresence represents a strategy for presence sensor.
-const SensorPresence = "sensor_presence"
+const (
+	// SensorPresence represents a strategy for presence sensor.
+	SensorPresence       = "sensor_presence"
+	sensorPresenceReport = "evt.presence.report"
+)
 
 // PresenceFimpMessage returns a fimp event for presence sensor.
 func PresenceFimpMessage(d config.Device, val int64) *fimpgo.FimpMessage {
 	min := boolMin(d.Config["minValue"])
 
 	return fimpgo.NewBoolMessage(
-		sensorReport,
+		sensorPresenceReport,
 		SensorPresence,
 		val > min,
 		nil,

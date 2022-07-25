@@ -9,3 +9,4 @@ testdata/log/*
 !testdata/log/.gitkeep
 testdata/data/*
 !testdata/data/.gitkeep
+src/log/iqcontrols.log

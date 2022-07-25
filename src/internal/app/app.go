@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/futurehomeno/cliffhanger/app"
 	"github.com/futurehomeno/cliffhanger/lifecycle"
@@ -9,6 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/rafalmnich/edge-iqcontrols-app/internal/config"
+	"github.com/rafalmnich/edge-iqcontrols-app/internal/reporter"
 )
 
 // Application represents the main application.
@@ -17,29 +19,47 @@ type Application interface {
 	app.InitializableApp
 }
 
-// New creates new instance of an application.
-func New(
-	cfgSrv *config.Service,
-	appLifecycle *lifecycle.Lifecycle,
-	manifestLoader manifest.Loader,
-) Application {
-	return &application{
-		cfgSrv:         cfgSrv,
-		appLifecycle:   appLifecycle,
-		manifestLoader: manifestLoader,
-	}
-}
-
 // application is a private implementation of the main application service.
 type application struct {
 	cfgSrv         *config.Service
 	appLifecycle   *lifecycle.Lifecycle
 	manifestLoader manifest.Loader
+	deviceReporter reporter.Device
+}
+
+// New creates new instance of an application.
+func New(
+	cfgSrv *config.Service,
+	appLifecycle *lifecycle.Lifecycle,
+	manifestLoader manifest.Loader,
+	deviceReporter reporter.Device,
+) Application {
+	return &application{
+		cfgSrv:         cfgSrv,
+		appLifecycle:   appLifecycle,
+		manifestLoader: manifestLoader,
+		deviceReporter: deviceReporter,
+	}
 }
 
 // Initialize performs all required initialization before starting the application.
 // todo: It should make inclusion reports for not stored devices.
 func (a application) Initialize() error {
+	for _, d := range a.cfgSrv.GetDevices() {
+		if !strings.Contains(d.ServiceName, "sensor") && d.VariableName == "" {
+			log.Errorf("application: device %s has no variable name, device is NOT included", d.Name)
+
+			continue
+		}
+
+		err := a.deviceReporter.InclusionReport(d)
+		if err != nil {
+			log.WithError(err).Errorf("application: failed to report inclusion for device %s", d.Name)
+
+			return err
+		}
+	}
+
 	return nil
 }
 

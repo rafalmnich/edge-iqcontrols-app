@@ -16,366 +16,515 @@
   },
   "devices": [
     {
-      "name": "North luminance",
+      "name": "Natężenie światła N",
       "address": 6,
-      "serviceName": "sensor_lumin"
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
     },
     {
-      "name": "Bathroom small presence sensor",
+      "name": "WC czujnik ruchu",
       "address": 166,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Laundry presence sensor",
+      "name": "Pralnia czujnik ruchu",
       "address": 167,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Utility presence sensor",
+      "name": "Kotłownia czujnik ruchu",
       "address": 168,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "X1 presence sensor",
+      "name": "??  czujnik ruchu",
       "address": 169,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Aga presence sensor",
+      "name": "Aga czujnik ruchu",
       "address": 170,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Entry presence sensor",
+      "name": "Wejście czujnik ruchu",
       "address": 171,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Kitchen presence sensor",
+      "name": "Kuchnia czujnik ruchu",
       "address": 172,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Living room presence sensor",
+      "name": "Salon czujnik ruchu",
       "address": 173,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Garage presence sensor",
+      "name": "Garaż czujnik ruchu",
       "address": 174,
       "serviceName": "sensor_presence",
+      "msgType": "evt.presence.report",
+      "valueType": "bool",
       "config": {
         "minValue": 50
       }
     },
     {
-      "name": "Bathroom big temperature sensor",
+      "name": "Łazienka czujnik temperatury",
       "address": 123,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living room temperature sensor",
+      "name": "Salon czujnik temperatury",
       "address": 124,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living entry temperature sensor",
+      "name": "Hall czujnik temperatury",
       "address": 125,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Office temperature sensor",
+      "name": "Biuro czujnik temperatury",
       "address": 126,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Kitchen temperature sensor",
+      "name": "Kuchnia czujnik temperatury",
       "address": 127,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Entry temperature sensor",
+      "name": "Wejście czujnik temperatury",
       "address": 128,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "WC temperature sensor",
+      "name": "WC czujnik temperatury",
       "address": 129,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Bedroom temperature sensor",
+      "name": "Sypialnia czujnik temperatury",
       "address": 130,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Garage temperature sensor",
+      "name": "Garaż czujnik temperatury",
       "address": 131,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Aga temperature sensor",
+      "name": "Aga czujnik temperatury",
       "address": 132,
       "serviceName": "sensor_temp",
+      "msgType": "evt.sensor.report",
+      "valueType": "float",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Office dimming lights 1",
+      "name": "Biuro biurko",
       "address": 22,
       "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0022",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Office light big",
+      "name": "Biuro duże",
       "address": 133,
       "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "valueType": "bool",
       "variableName": "IOO0133"
     },
     {
-      "name": "Office light small",
+      "name": "Biuro małe",
       "address": 134,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "valueType": "bool",
+      "variableName": "IOO0134"
     },
     {
-      "name": "Living room main light",
+      "name": "Salon główne",
       "address": 135,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "valueType": "bool",
+      "variableName": "IOO0135"
     },
     {
-      "name": "Living room night light",
+      "name": "Salon nocne",
       "address": 13,
       "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0013",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living room sofa light",
+      "name": "Salon sofa 1",
       "address": 14,
       "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0014",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living room sofa light 2",
+      "name": "Salon sofa 2",
       "address": 23,
       "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0023",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living room tv light",
+      "name": "Salon tv 1",
       "address": 15,
       "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0015",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living room tv light 2",
+      "name": "Salon tv 2",
       "address": 24,
       "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0024",
       "config": {
         "multiplier": 0.1
       }
     },
     {
-      "name": "Living room center light",
+      "name": "Salon środek",
       "address": 137,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0137",
+      "valueType": "bool"
     },
     {
-      "name": "Living room hall light 1",
+      "name": "Hall 1",
       "address": 138,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0138",
+      "valueType": "bool"
     },
-    {},
     {
-      "name": "Living room hall light 2",
+      "name": "Hall 2",
       "address": 139,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0139",
+      "valueType": "bool"
     },
     {
-      "name": "Living room window light",
+      "name": "Salon przy oknie",
       "address": 140,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0140",
+      "valueType": "bool"
     },
     {
-      "name": "Bathroom big lights small",
+      "name": "Łazienka małe",
       "address": 141,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0141",
+      "valueType": "bool"
     },
     {
-      "name": "Bathroom big lights big",
+      "name": "Łazienka duże",
       "address": 142,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0142",
+      "valueType": "bool"
     },
     {
-      "name": "Bathroom big fan",
+      "name": "Łazienka wentylator",
       "address": 143,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0143",
+      "valueType": "bool"
     },
     {
-      "name": "Wc main",
+      "name": "Wc główne",
       "address": 144,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0144",
+      "valueType": "bool"
     },
     {
-      "name": "Wc light over mirror",
+      "name": "Wc nad lustrem",
       "address": 145,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0145",
+      "valueType": "bool"
     },
     {
       "name": "Wc fan",
       "address": 146,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0146",
+      "valueType": "bool"
     },
     {
       "name": "Kitchen light 1",
       "address": 147,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0147",
+      "valueType": "bool"
     },
     {
       "name": "Kitchen light 2",
       "address": 148,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0148",
+      "valueType": "bool"
     },
     {
       "name": "Kitchen light hanging",
       "address": 149,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0149",
+      "valueType": "bool"
     },
     {
       "name": "Bedroom light 1",
       "address": 150,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0150",
+      "valueType": "bool"
     },
     {
       "name": "Bedroom light 2",
       "address": 151,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0151",
+      "valueType": "bool"
     },
     {
       "name": "Bedroom night light",
       "address": 152,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OU0T152",
+      "valueType": "bool"
     },
     {
       "name": "Garage lamp Aga",
       "address": 153,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OU0T153",
+      "valueType": "bool"
     },
     {
       "name": "Garage lamp Rafal",
       "address": 154,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OU0T154",
+      "valueType": "bool"
     },
     {
       "name": "Attic light",
       "address": 155,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0155",
+      "valueType": "bool"
     },
     {
       "name": "Outside top light",
       "address": 156,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0156",
+      "valueType": "bool"
     },
     {
       "name": "Aga lights 1",
       "address": 157,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0157",
+      "valueType": "bool"
     },
     {
       "name": "Aga lights 2",
       "address": 158,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0158",
+      "valueType": "bool"
     },
     {
       "name": "Entry lights",
       "address": 159,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0159",
+      "valueType": "bool"
     },
     {
       "name": "Utility lights",
       "address": 160,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0160",
+      "valueType": "bool"
     },
     {
       "name": "Laundry lights",
       "address": 161,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0161",
+      "valueType": "bool"
     },
     {
       "name": "Garden pump",
       "address": 162,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0162",
+      "valueType": "bool"
     },
     {
       "name": "Front AC",
       "address": 163,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0163",
+      "valueType": "bool"
     },
     {
       "name": "Bonfire",
       "address": 164,
-      "serviceName": "out_bin_switch"
+      "serviceName": "out_bin_switch",
+      "msgType": "evt.binary.report",
+      "variableName": "OUT0164",
+      "valueType": "bool"
     }
   ]
 }
