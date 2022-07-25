@@ -52,12 +52,13 @@ func (a application) Initialize() error {
 			continue
 		}
 
-		err := a.deviceReporter.InclusionReport(d)
-		if err != nil {
-			log.WithError(err).Errorf("application: failed to report inclusion for device %s", d.Name)
-
-			return err
-		}
+		// todo: make inclusion report for device later with checking for existence.
+		// err := a.deviceReporter.InclusionReport(d)
+		// if err != nil {
+		// 	log.WithError(err).Errorf("application: failed to report inclusion for device %s", d.Name)
+		//
+		// 	return err
+		// }
 	}
 
 	return nil

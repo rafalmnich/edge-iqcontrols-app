@@ -8,18 +8,42 @@ on:
 
 jobs:
 
-  build:
+  tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.18
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
 
-    - name: Build
-      run: go build -v ./...
+      - name: Mosquitto MQTT Broker in GitHub Actions
+        uses: Namoshek/mosquitto-github-action@v1
+        with:
+          version: '1.6'
+          ports: '11883:1883'
+          config: ${{ github.workspace }}/.github/workflows/mosquitto.conf
 
-    - name: Test
-      run: go test -v ./...
+      - name: Test
+        run: go test -p 1 -v -covermode=atomic -coverprofile=profile_full.cov -coverpkg=./... ./...
+        working-directory: ./src
+
+      - name: Test cleanup
+        run: cat profile_full.cov | grep -v .pb.go | grep -v mock | grep -v test > profile.cov;
+        working-directory: ./src
+        
+      - name: Convert coverage
+        uses: jandelgado/gcov2lcov-action@v1
+        with:
+          infile: profile.cov        # optional, default filename is `coverage.out`
+          outfile: coverage.lcov      # optional, default filename is `coverage.lcov`
+          version: v1.0.4             # optional, use specific `gcov2lcov` release version
+          working-directory: src # optional, change working directory
+
+      - name: Test coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: ${{ github.workspace }}/src/coverage.lcov 
+          

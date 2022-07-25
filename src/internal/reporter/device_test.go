@@ -25,7 +25,6 @@ func TestInclusionReport(t *testing.T) {
 				Name:        "North luminance",
 				Address:     6,
 				ServiceName: "sensor_lumin",
-				Type:        "in",
 				MsgType:     "evt.sensor.report",
 				ValueType:   "float",
 			},
@@ -37,7 +36,6 @@ func TestInclusionReport(t *testing.T) {
 				Name:        "Bathroom small presence sensor",
 				Address:     166,
 				ServiceName: "sensor_presence",
-				Type:        "in",
 				MsgType:     "evt.sensor.report",
 				ValueType:   "bool",
 			},
@@ -51,7 +49,7 @@ func TestInclusionReport(t *testing.T) {
 	for _, ttt := range tests {
 		tt := ttt
 		t.Run(tt.name, func(t *testing.T) {
-			msgChan := Subscribe(t, mqtt, "pt:j1/mt:evt/rt:ad/rn:flow/ad:1_0")
+			msgChan := Subscribe(t, mqtt, "pt:j1/mt:evt/rt:ad/rn:flow/ad:1")
 			t.Cleanup(func() {
 				close(msgChan)
 			})
@@ -93,7 +91,7 @@ func sensorLuminReport() fimptype.ThingInclusionReport {
 				Groups:  []string{"1"},
 				Interfaces: []fimptype.Interface{
 					{
-						Type:      "in",
+						Type:      "out",
 						MsgType:   "evt.sensor.report",
 						ValueType: "float",
 						Version:   "1",
@@ -126,7 +124,7 @@ func sensorPresenceReport() fimptype.ThingInclusionReport {
 				Groups:  []string{"1"},
 				Interfaces: []fimptype.Interface{
 					{
-						Type:      "in",
+						Type:      "out",
 						MsgType:   "evt.sensor.report",
 						ValueType: "bool",
 						Version:   "1",

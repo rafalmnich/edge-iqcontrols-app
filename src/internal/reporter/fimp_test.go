@@ -100,8 +100,8 @@ func GetMQTT(t *testing.T) *fimpgo.MqttTransport {
 	mqtt := fimpgo.NewMqttTransport(
 		"tcp://localhost:11883",
 		"app_tests",
-		"guest",
-		"guest",
+		"",
+		"",
 		true,
 		1,
 		1,
@@ -123,7 +123,7 @@ func check(t *testing.T, msgChan chan *fimpgo.Message, checked chan struct{}, ch
 		checkFunc(t, msg)
 
 		return
-	case <-time.After(time.Hour):
+	case <-time.After(time.Second * 15):
 		t.Fatal("timeout")
 	}
 

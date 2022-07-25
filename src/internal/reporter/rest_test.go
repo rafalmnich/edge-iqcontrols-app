@@ -74,7 +74,7 @@ func TestRestPublisher_Publish(t *testing.T) {
 
 			s := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				require.Equal(t, "POST", r.Method)
-				require.Equal(t, "/cgx/all_ios.cgx", r.URL.Path)
+				require.Equal(t, "/cgx/custom/all.cgx", r.URL.Path)
 				require.Equal(t, "application/x-www-form-urlencoded", r.Header.Get("Content-Type"))
 				require.Equal(t, tt.value, r.FormValue(tt.address))
 			}))
