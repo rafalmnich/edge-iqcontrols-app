@@ -20,10 +20,10 @@ jobs:
 
     - name: Mosquitto MQTT Broker in GitHub Actions
       uses: Namoshek/mosquitto-github-action@v1
-#      with:
-#        version: '1.6'
-#        ports: '11883:1883'
-##        certificates: ${{ github.workspace }}/.ci/tls-certificates
+      with:
+        version: '1.6'
+        ports: '11883:1883'
+        certificates: ${{ github.workspace }}/.ci/tls-certificates
 ##        config: ${{ github.workspace }}/.ci/mosquitto.conf
 ##        password-file: ${{ github.workspace}}/.ci/mosquitto.passwd
 #        container-name: 'mqtt'
