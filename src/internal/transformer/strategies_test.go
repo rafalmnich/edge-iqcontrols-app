@@ -28,8 +28,8 @@ func TestFimpStrategies(t *testing.T) {
 			want: &fimpgo.FimpMessage{
 				Type:      "evt.sensor.report",
 				Service:   "sensor_lumin",
-				ValueType: "float",
-				Value:     float64(100),
+				ValueType: "int",
+				Value:     int64(100),
 			},
 		},
 		{
@@ -114,7 +114,7 @@ func TestFimpStrategies(t *testing.T) {
 				},
 			},
 			want: &fimpgo.FimpMessage{
-				Type:      "evt.level.report",
+				Type:      "evt.lvl.report",
 				Service:   "out_lvl_switch",
 				ValueType: "int",
 				Value:     int64(37),
@@ -143,7 +143,7 @@ func presence(t *testing.T, v bool) *fimpgo.FimpMessage {
 	t.Helper()
 
 	return &fimpgo.FimpMessage{
-		Type:      "evt.sensor.report",
+		Type:      "evt.presence.report",
 		Service:   "sensor_presence",
 		ValueType: "bool",
 		Value:     v,
