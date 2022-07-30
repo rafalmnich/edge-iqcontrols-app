@@ -1,6 +1,7 @@
 package reporter_test
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/futurehomeno/fimpgo"
@@ -67,6 +68,15 @@ func TestInclusionReport(t *testing.T) {
 			<-checked
 		})
 	}
+}
+
+func TestFoo(t *testing.T) {
+	s := sensorLuminReport()
+
+	b, _ := json.Marshal(s)
+
+	t.Log(string(b))
+
 }
 
 func sensorLuminReport() fimptype.ThingInclusionReport {

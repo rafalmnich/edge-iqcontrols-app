@@ -47,6 +47,7 @@ func (r *rest) Report(msg *fimpgo.Message) error {
 		return err
 	}
 
+	// todo: publish also a fimp event after this. ??
 	return r.publisher.Publish(address, value)
 }
 
@@ -62,10 +63,14 @@ func NewRestPublisher(host string, client doer) RestPublisher {
 
 // Publish sends a value to mass rest api.
 func (r *restPublisher) Publish(address, value string) error {
+	return publish(r.client, r.host, cgxPath, address, value)
+}
+
+func publish(client doer, host, cgxPath, address, value string) error {
 	form := url.Values{}
 	form.Add(address, value)
 
-	req, err := http.NewRequest(http.MethodPost, r.host+cgxPath, strings.NewReader(form.Encode()))
+	req, err := http.NewRequest(http.MethodPost, host+cgxPath, strings.NewReader(form.Encode()))
 	if err != nil {
 		return err
 	}
@@ -74,7 +79,7 @@ func (r *restPublisher) Publish(address, value string) error {
 
 	log.Debugf("Sending request: %s, data: %s", req.URL.String(), form.Encode())
 
-	resp, err := r.client.Do(req)
+	resp, err := client.Do(req)
 	if err != nil {
 		return err
 	}

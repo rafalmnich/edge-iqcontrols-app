@@ -136,6 +136,7 @@ func newRouting(cfg *config.Config) []*router.Routing {
 		getConfigurationLocker(cfg),
 		getApplication(cfg),
 		getRestReporter(cfg),
+		getHomeModeReporter(cfg),
 	)
 }
 
@@ -154,6 +155,10 @@ func getFimpReporter(cfg *config.Config) reporter.Reporter {
 
 func getRestReporter(cfg *config.Config) reporter.Rest {
 	return reporter.NewRest(reporter.NewRestPublisher(cfg.HTTP.Host, &http.Client{Timeout: time.Second * 5}), transformer.NewDevice(cfg.Devices))
+}
+
+func getHomeModeReporter(cfg *config.Config) reporter.Rest {
+	return reporter.NewMode(cfg.HTTP.Host, &http.Client{Timeout: time.Second * 5})
 }
 
 func getConnection(cfg *config.Config) listener.Connection {
