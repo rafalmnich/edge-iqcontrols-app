@@ -46,6 +46,7 @@ func Build(cfg *config.Config) (edge.Edge, error) {
 		WithTopicSubscription(
 			router.TopicPatternApplication(routing.ResourceName),
 			fmt.Sprintf("pt:j1/mt:cmd/rt:dev/rn:%s/ad:1/#", routing.ServiceName),
+			"pt:j1/mt:evt/rt:app/rn:vinculum/ad:1",
 		).
 		WithRouting(newRouting(cfg)...).
 		WithTask(newTasks(cfg)...).

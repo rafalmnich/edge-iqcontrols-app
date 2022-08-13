@@ -4,6 +4,8 @@ package mocks
 
 import (
 	fimpgo "github.com/futurehomeno/fimpgo"
+	config "github.com/rafalmnich/edge-iqcontrols-app/internal/config"
+
 	mock "github.com/stretchr/testify/mock"
 
 	testing "testing"
@@ -15,14 +17,14 @@ type DeviceMapper struct {
 }
 
 // Device provides a mock function with given fields: msg
-func (_m *DeviceMapper) Device(msg *fimpgo.Message) (string, string, error) {
+func (_m *DeviceMapper) Device(msg *fimpgo.Message) (config.Device, string, error) {
 	ret := _m.Called(msg)
 
-	var r0 string
-	if rf, ok := ret.Get(0).(func(*fimpgo.Message) string); ok {
+	var r0 config.Device
+	if rf, ok := ret.Get(0).(func(*fimpgo.Message) config.Device); ok {
 		r0 = rf(msg)
 	} else {
-		r0 = ret.Get(0).(string)
+		r0 = ret.Get(0).(config.Device)
 	}
 
 	var r1 string

@@ -85,14 +85,14 @@ func TestDevice_Device(t *testing.T) {
 
 			d := NewDevice(sampleDevices(t))
 
-			add, value, err := d.Device(tt.msg)
+			device, value, err := d.Device(tt.msg)
 			if tt.wantErr {
 				assert.Error(t, err)
 
 				return
 			}
 			assert.NoError(t, err)
-			assert.Equal(t, tt.addr, add)
+			assert.Equal(t, tt.addr, device.VariableName)
 			assert.Equal(t, tt.value, value)
 		})
 	}

@@ -56,7 +56,7 @@ func TestFimpStrategies(t *testing.T) {
 			val:      10,
 			device: config.Device{
 				Config: map[string]interface{}{
-					"minValue": 10,
+					"minValue": float64(10),
 				},
 			},
 			want: presence(t, false),

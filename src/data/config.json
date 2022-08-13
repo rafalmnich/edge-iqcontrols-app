@@ -11,20 +11,26 @@
   "udp": {
     "port": "3001"
   },
-  "http": {
-    "host": "http://192.168.8.150"
+  "mass": {
+    "lights": "http://192.168.8.150/cgx/custom/all.cgx",
+    "heating": "http://192.168.8.134/cgx/mass2.cgx"
   },
   "devices": [
     {
-      "name": "Natężenie światła N",
-      "address": 6,
-      "serviceName": "sensor_lumin",
-      "msgType": "evt.sensor.report",
-      "valueType": "float"
+      "name": "Wc lustro",
+      "address": 16,
+      "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0016",
+      "config": {
+        "multiplier": 0.1
+      },
+      "mass": "heating"
     },
     {
       "name": "WC czujnik ruchu",
-      "address": 166,
+      "address": 207,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -34,7 +40,7 @@
     },
     {
       "name": "Pralnia czujnik ruchu",
-      "address": 167,
+      "address": 208,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -44,7 +50,7 @@
     },
     {
       "name": "Kotłownia czujnik ruchu",
-      "address": 168,
+      "address": 209,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -54,7 +60,7 @@
     },
     {
       "name": "??  czujnik ruchu",
-      "address": 169,
+      "address": 210,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -64,7 +70,7 @@
     },
     {
       "name": "Aga czujnik ruchu",
-      "address": 170,
+      "address": 211,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -74,7 +80,7 @@
     },
     {
       "name": "Wejście czujnik ruchu",
-      "address": 171,
+      "address": 212,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -84,7 +90,7 @@
     },
     {
       "name": "Kuchnia czujnik ruchu",
-      "address": 172,
+      "address": 213,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -94,7 +100,7 @@
     },
     {
       "name": "Salon czujnik ruchu",
-      "address": 173,
+      "address": 214,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -104,7 +110,7 @@
     },
     {
       "name": "Garaż czujnik ruchu",
-      "address": 174,
+      "address": 215,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -213,12 +219,83 @@
       }
     },
     {
+      "name": "Łazienka czujnik oświetlenia",
+      "address": 165,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Salon czujnik oświetlenia",
+      "address": 166,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Hall czujnik oświetlenia",
+      "address": 167,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Biuro czujnik oświetlenia",
+      "address": 168,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Kuchnia czujnik oświetlenia",
+      "address": 169,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Wejście czujnik oświetlenia",
+      "address": 170,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "WC czujnik oświetlenia",
+      "address": 171,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Sypialnia czujnik oświetlenia",
+      "address": 172,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Garaż czujnik oświetlenia",
+      "address": 173,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
+      "name": "Aga czujnik oświetlenia",
+      "address": 174,
+      "serviceName": "sensor_lumin",
+      "msgType": "evt.sensor.report",
+      "valueType": "float"
+    },
+    {
       "name": "Biuro biurko",
       "address": 22,
       "serviceName": "out_lvl_switch",
       "msgType": "evt.lvl.report",
       "valueType": "int",
       "variableName": "OUT0022",
+      "mass": "heating",
       "config": {
         "multiplier": 0.1
       }
@@ -229,7 +306,7 @@
       "serviceName": "out_bin_switch",
       "msgType": "evt.binary.report",
       "valueType": "bool",
-      "variableName": "IOO0133"
+      "variableName": "OUT0133"
     },
     {
       "name": "Biuro małe",
@@ -237,7 +314,7 @@
       "serviceName": "out_bin_switch",
       "msgType": "evt.binary.report",
       "valueType": "bool",
-      "variableName": "IOO0134"
+      "variableName": "OUT0134"
     },
     {
       "name": "Salon główne",
@@ -245,7 +322,7 @@
       "serviceName": "out_bin_switch",
       "msgType": "evt.binary.report",
       "valueType": "bool",
-      "variableName": "IOO0135"
+      "variableName": "OUT0135"
     },
     {
       "name": "Salon nocne",
@@ -427,7 +504,7 @@
       "address": 152,
       "serviceName": "out_bin_switch",
       "msgType": "evt.binary.report",
-      "variableName": "OU0T152",
+      "variableName": "OUT0152",
       "valueType": "bool"
     },
     {
@@ -435,7 +512,7 @@
       "address": 153,
       "serviceName": "out_bin_switch",
       "msgType": "evt.binary.report",
-      "variableName": "OU0T153",
+      "variableName": "OUT0153",
       "valueType": "bool"
     },
     {
@@ -443,7 +520,7 @@
       "address": 154,
       "serviceName": "out_bin_switch",
       "msgType": "evt.binary.report",
-      "variableName": "OU0T154",
+      "variableName": "OUT0154",
       "valueType": "bool"
     },
     {
