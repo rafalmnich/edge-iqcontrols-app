@@ -3,6 +3,7 @@
 package mocks
 
 import (
+	config "github.com/rafalmnich/edge-iqcontrols-app/internal/config"
 	mock "github.com/stretchr/testify/mock"
 
 	testing "testing"
@@ -13,13 +14,13 @@ type RestPublisher struct {
 	mock.Mock
 }
 
-// Publish provides a mock function with given fields: address, value
-func (_m *RestPublisher) Publish(address string, value string) error {
-	ret := _m.Called(address, value)
+// Publish provides a mock function with given fields: device, value
+func (_m *RestPublisher) Publish(device config.Device, value string) error {
+	ret := _m.Called(device, value)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, string) error); ok {
-		r0 = rf(address, value)
+	if rf, ok := ret.Get(0).(func(config.Device, string) error); ok {
+		r0 = rf(device, value)
 	} else {
 		r0 = ret.Error(0)
 	}

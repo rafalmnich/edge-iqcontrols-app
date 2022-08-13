@@ -54,16 +54,16 @@ func (m *mode) Report(msg *fimpgo.Message) error {
 }
 
 func (m *mode) publish(v int) error {
-	err := publish(m.client, m.host, eepCgxPath, backlightEepAddress, strconv.Itoa(v))
+	err := publish(m.client, m.host+eepCgxPath, backlightEepAddress, strconv.Itoa(v))
 	if err != nil {
 		return err
 	}
 
 	// publishing two changes as we don't know what's the current status. It's faster than checking it before sending.
-	err = publish(m.client, m.host, iosPath, "IOO0122", "0")
+	err = publish(m.client, m.host+iosPath, "IOO0122", "0")
 	if err != nil {
 		return err
 	}
 
-	return publish(m.client, m.host, iosPath, "IOO0122", "10")
+	return publish(m.client, m.host+iosPath, "IOO0122", "10")
 }

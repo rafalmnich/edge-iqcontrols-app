@@ -13,8 +13,9 @@ type (
 		Port string `json:"port"`
 	}
 
-	http struct {
-		Host string `json:"host"`
+	mass struct {
+		Lights  string `json:"lights"`
+		Heating string `json:"heating"`
 	}
 
 	// Device represents a device configuration for mapping and value conversion.
@@ -26,6 +27,7 @@ type (
 		VariableName string                 `json:"variableName"`
 		MsgType      string                 `json:"msgType"`
 		ValueType    string                 `json:"valueType"`
+		Mass         string                 `json:"mass"`
 	}
 )
 
@@ -35,7 +37,7 @@ type Config struct {
 
 	// User configurable settings
 	UDP     udp      `json:"udp"`
-	HTTP    http     `json:"http"`
+	Mass    mass     `json:"mass"`
 	Devices []Device `json:"devices"`
 }
 
@@ -99,20 +101,20 @@ func (cs *Service) SetUDPPort(value string) error {
 	return cs.Storage.Save()
 }
 
-// GetHTTPHost allows to safely access http host from configuration.
+// GetHTTPHost allows to safely access mass host from configuration.
 func (cs *Service) GetHTTPHost() string {
 	cs.lock.RLock()
 	defer cs.lock.RUnlock()
 
-	return cs.Storage.Model().(*Config).HTTP.Host
+	return cs.Storage.Model().(*Config).Mass.Lights
 }
 
-// SetHTTPHost allows to safely set and persist http host in configuration file.
+// SetHTTPHost allows to safely set and persist mass host in configuration file.
 func (cs *Service) SetHTTPHost(value string) error {
 	cs.lock.Lock()
 	defer cs.lock.Unlock()
 
-	cs.Storage.Model().(*Config).HTTP.Host = value
+	cs.Storage.Model().(*Config).Mass.Lights = value
 
 	return cs.Storage.Save()
 }

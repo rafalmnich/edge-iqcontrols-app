@@ -27,7 +27,7 @@ func PresenceFimpMessage(d config.Device, val int64) *fimpgo.FimpMessage {
 }
 
 func boolMin(v interface{}) int64 {
-	min, ok := v.(int)
+	min, ok := v.(float64)
 	if !ok {
 		return 0
 	}

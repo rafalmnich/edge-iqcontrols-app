@@ -1,6 +1,7 @@
 package reporter
 
 import (
+	"encoding/json"
 	"strconv"
 
 	"github.com/futurehomeno/fimpgo"
@@ -29,14 +30,19 @@ func NewDevice(publisher FimpPublisher) Device {
 
 // InclusionReport reports an inclusion of a device.
 func (i *device) InclusionReport(device config.Device) error {
-	msg := fimpgo.NewObjectMessage("evt.thing.inclusion_report", "iqcontrols", i.inclusion(device), nil, nil, nil)
+	inclusion := i.inclusion(device)
+
+	msg := fimpgo.NewObjectMessage("evt.thing.inclusion_report", "iqcontrols", inclusion, nil, nil, nil)
 	addr, _ := fimpgo.NewAddressFromString("pt:j1/mt:evt/rt:ad/rn:flow/ad:1")
+
+	b, _ := json.Marshal(msg)
+	_ = b
 
 	return i.publisher.Publish(addr, msg)
 }
 
 // ExclusionReport removes device from
-func (i *device) ExclusionReport(deviceID int) error {
+func (i *device) ExclusionReport(_ int) error {
 	// TODO implement me
 	panic("implement me")
 }

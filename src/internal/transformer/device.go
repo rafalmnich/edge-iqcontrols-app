@@ -35,24 +35,24 @@ func NewDevice(devices []config.Device) *Device {
 }
 
 // Device returns a device address and name for a given fimp message.
-func (r *Device) Device(msg *fimpgo.Message) (address string, value string, err error) {
+func (r *Device) Device(msg *fimpgo.Message) (device config.Device, value string, err error) {
 	d := r.findDevice(msg)
 
 	if d.Address == 0 {
-		return "", "", fmt.Errorf("device with address %d not found", d.Address)
+		return config.Device{}, "", fmt.Errorf("device with address %d not found", d.Address)
 	}
 
 	strategy, ok := r.strategies[d.ServiceName]
 	if !ok {
-		return "", "", fmt.Errorf("strategy for Device type %s not found", d.ServiceName)
+		return config.Device{}, "", fmt.Errorf("strategy for Device type %s not found", d.ServiceName)
 	}
 
 	value, err = strategy.Value(d, msg)
 	if err != nil {
-		return "", "", err
+		return config.Device{}, "", err
 	}
 
-	return d.VariableName, value, nil
+	return d, value, nil
 }
 
 func (r *Device) findDevice(msg *fimpgo.Message) config.Device {

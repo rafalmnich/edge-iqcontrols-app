@@ -7,18 +7,18 @@ import (
 
 	"github.com/futurehomeno/fimpgo"
 	log "github.com/sirupsen/logrus"
-)
 
-const cgxPath = "/cgx/custom/all.cgx"
+	"github.com/rafalmnich/edge-iqcontrols-app/internal/config"
+)
 
 type (
 	// RestPublisher represents a rest publisher.
 	RestPublisher interface {
-		Publish(address, value string) error
+		Publish(device config.Device, value string) error
 	}
 	// DeviceMapper represents a device mapper.
 	DeviceMapper interface {
-		Device(msg *fimpgo.Message) (address string, value string, err error)
+		Device(msg *fimpgo.Message) (device config.Device, value string, err error)
 	}
 	// Rest represents a rest reporter.
 	Rest interface {
@@ -42,35 +42,41 @@ func NewRest(publisher RestPublisher, mapper DeviceMapper) Rest {
 
 // Report reports a value taken from fimp message to mass rest api.
 func (r *rest) Report(msg *fimpgo.Message) error {
-	address, value, err := r.mapper.Device(msg)
+	device, value, err := r.mapper.Device(msg)
 	if err != nil {
 		return err
 	}
 
-	// todo: publish also a fimp event after this. ??
-	return r.publisher.Publish(address, value)
+	return r.publisher.Publish(device, value)
 }
 
 type restPublisher struct {
-	host   string
-	client doer
+	client         doer
+	massLightsCgx  string
+	massHeatingCgx string
 }
 
 // NewRestPublisher creates a new rest publisher.
-func NewRestPublisher(host string, client doer) RestPublisher {
-	return &restPublisher{host: host, client: client}
+func NewRestPublisher(client doer, massLightCgx string, massHeatingCgx string) RestPublisher {
+	return &restPublisher{client: client, massLightsCgx: massLightCgx, massHeatingCgx: massHeatingCgx}
 }
 
 // Publish sends a value to mass rest api.
-func (r *restPublisher) Publish(address, value string) error {
-	return publish(r.client, r.host, cgxPath, address, value)
+func (r *restPublisher) Publish(device config.Device, value string) error {
+	cgxPath := r.massLightsCgx
+
+	if device.Mass == "heating" {
+		cgxPath = r.massHeatingCgx
+	}
+
+	return publish(r.client, cgxPath, device.VariableName, value)
 }
 
-func publish(client doer, host, cgxPath, address, value string) error {
+func publish(client doer, cgxPath, address, value string) error {
 	form := url.Values{}
 	form.Add(address, value)
 
-	req, err := http.NewRequest(http.MethodPost, host+cgxPath, strings.NewReader(form.Encode()))
+	req, err := http.NewRequest(http.MethodPost, cgxPath, strings.NewReader(form.Encode()))
 	if err != nil {
 		return err
 	}

@@ -11,20 +11,26 @@
   "udp": {
     "port": "3001"
   },
-  "http": {
-    "host": "http://192.168.8.150"
+  "mass": {
+    "lights": "http://192.168.8.150/cgx/custom/all.cgx",
+    "heating": "http://192.168.8.134/cgx/mass2.cgx"
   },
   "devices": [
     {
-      "name": "Natężenie światła N",
-      "address": 6,
-      "serviceName": "sensor_luminn",
-      "msgType": "evt.sensor.report",
-      "valueType": "float"
+      "name": "Wc lustro",
+      "address": 16,
+      "serviceName": "out_lvl_switch",
+      "msgType": "evt.lvl.report",
+      "valueType": "int",
+      "variableName": "OUT0016",
+      "config": {
+        "multiplier": 0.1
+      },
+      "mass": "heating"
     },
     {
       "name": "WC czujnik ruchu",
-      "address": 183,
+      "address": 207,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -34,7 +40,7 @@
     },
     {
       "name": "Pralnia czujnik ruchu",
-      "address": 184,
+      "address": 208,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -44,7 +50,7 @@
     },
     {
       "name": "Kotłownia czujnik ruchu",
-      "address": 185,
+      "address": 209,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -54,7 +60,7 @@
     },
     {
       "name": "??  czujnik ruchu",
-      "address": 186,
+      "address": 210,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -64,7 +70,7 @@
     },
     {
       "name": "Aga czujnik ruchu",
-      "address": 187,
+      "address": 211,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -74,7 +80,7 @@
     },
     {
       "name": "Wejście czujnik ruchu",
-      "address": 188,
+      "address": 212,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -84,7 +90,7 @@
     },
     {
       "name": "Kuchnia czujnik ruchu",
-      "address": 189,
+      "address": 213,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -94,7 +100,7 @@
     },
     {
       "name": "Salon czujnik ruchu",
-      "address": 190,
+      "address": 214,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -104,7 +110,7 @@
     },
     {
       "name": "Garaż czujnik ruchu",
-      "address": 191,
+      "address": 215,
       "serviceName": "sensor_presence",
       "msgType": "evt.presence.report",
       "valueType": "bool",
@@ -289,6 +295,7 @@
       "msgType": "evt.lvl.report",
       "valueType": "int",
       "variableName": "OUT0022",
+      "mass": "heating",
       "config": {
         "multiplier": 0.1
       }
