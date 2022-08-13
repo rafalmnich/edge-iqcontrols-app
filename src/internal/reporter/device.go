@@ -1,7 +1,6 @@
 package reporter
 
 import (
-	"encoding/json"
 	"strconv"
 
 	"github.com/futurehomeno/fimpgo"
@@ -34,9 +33,6 @@ func (i *device) InclusionReport(device config.Device) error {
 
 	msg := fimpgo.NewObjectMessage("evt.thing.inclusion_report", "iqcontrols", inclusion, nil, nil, nil)
 	addr, _ := fimpgo.NewAddressFromString("pt:j1/mt:evt/rt:ad/rn:flow/ad:1")
-
-	b, _ := json.Marshal(msg)
-	_ = b
 
 	return i.publisher.Publish(addr, msg)
 }
